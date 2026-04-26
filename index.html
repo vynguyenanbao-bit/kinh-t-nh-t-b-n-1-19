@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Trắc nghiệm Nhật Bản 1-19</title>
+<style>
+body{
+font-family:Arial;
+max-width:900px;
+margin:30px auto;
+padding:20px;
+background:#f5f7fb;
+}
+.box{
+background:#fff;
+padding:30px;
+border-radius:18px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+#question{
+font-size:24px;
+margin:20px 0;
+}
+.option{
+display:block;
+padding:14px;
+border:1px solid #ccc;
+margin:10px 0;
+border-radius:12px;
+cursor:pointer;
+}
+.option:hover{
+background:#eef3ff;
+}
+button{
+padding:12px 20px;
+margin:10px 5px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+#next{background:#4d88ff;color:white;}
+#prev{background:#ddd;}
+#submit{background:#1aa75d;color:white;}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h1>TRẮC NGHIỆM NHẬT BẢN (1-19)</h1>
+
+<h3 id="progress"></h3>
+
+<div id="question"></div>
+
+<div id="answers"></div>
+
+<button id="prev" onclick="prevQuestion()">Câu trước</button>
+<button id="next" onclick="nextQuestion()">Câu tiếp</button>
+<button id="submit" onclick="submitQuiz()">Nộp bài</button>
+
+</div>
+
+<script>
+
+const quiz=[
+
+{
+q:"Câu 1: Nhật Bản nằm ở vị trí nào sau đây?",
+options:["A. Đông Á","B. Nam Á","C. Bắc Á","D. Tây Á"],
+answer:0
+},
+
+{
+q:"Câu 2: Đảo có diện tích lớn nhất Nhật Bản là",
+options:["A. Hô-cai-đô","B. Hôn-su","C. Xi-cô-cư","D. Kiu-xiu"],
+answer:1
+},
+
+{
+q:"Câu 3: Nhật Bản không phải là một đất nước",
+options:[
+"A. Quần đảo hình vòng cung",
+"B. Có 4 đảo lớn",
+"C. Có hàng ngàn đảo nhỏ",
+"D. Giàu có tài nguyên khoáng sản"
+],
+answer:3
+},
+
+{
+q:"Câu 4: Vị trí địa lí không tạo thuận lợi để Nhật Bản",
+options:[
+"A. Giao lưu thương mại",
+"B. Xây dựng hải cảng",
+"C. Phát triển kinh tế biển",
+"D. Nối đường bộ quốc tế"
+],
+answer:3
+},
+
+{
+q:"Câu 5: Khó khăn chủ yếu nhất về tự nhiên của Nhật Bản là",
+options:[
+"A. Bờ biển dài",
+"B. Nhiều núi lửa động đất",
+"C. Trữ lượng khoáng sản rất ít",
+"D. Nhiều đảo cách xa nhau"
+],
+answer:2
+},
+
+{
+q:"Câu 6: Đất nước Nhật Bản có",
+options:[
+"A. Vùng biển rộng, đường bờ biển dài",
+"B. Đường bờ biển dài, ít vũng vịnh",
+"C. Ít vũng vịnh, nhiều dòng biển nóng",
+"D. Nhiều dòng biển nóng, nhiều đảo"
+],
+answer:0
+},
+
+{
+q:"Câu 7: Nơi dòng biển nóng lạnh gặp nhau thường tạo nên",
+options:[
+"A. Ngư trường nhiều cá",
+"B. Sóng thần",
+"C. Động đất",
+"D. Bão lớn"
+],
+answer:0
+},
+
+{
+q:"Câu 8: Khí hậu Nhật Bản không đúng là",
+options:[
+"A. Mưa tương đối cao",
+"B. Thay đổi bắc nam",
+"C. Có khác nhau theo mùa",
+"D. Chủ yếu nhiệt đới"
+],
+answer:3
+},
+
+{
+q:"Câu 9: Phát biểu không đúng khí hậu phía bắc Nhật Bản",
+options:[
+"A. Ôn đới",
+"B. Đông kéo dài lạnh",
+"C. Mùa hạ nóng mưa to bão",
+"D. Nhiều tuyết mùa đông"
+],
+answer:2
+},
+
+{
+q:"Câu 10: Phát biểu không đúng về dân cư xã hội Nhật Bản",
+options:[
+"A. Thu nhập cao",
+"B. Nhiều thành tựu KHKT",
+"C. Lao động hàng đầu thế giới",
+"D. Số lượng nhập cư di cư lớn"
+],
+answer:3
+},
+
+{
+q:`Câu 11: Có bao nhiêu phát biểu sau đây đúng với thiên nhiên Nhật Bản?
+
+1) Có nhiều đảo, quần đảo.
+2) Nghèo tài nguyên khoáng sản.
+3) Có khí hậu gió mùa.
+4) Có nhiều núi lửa, động đất.`,
+options:[
+"A.1",
+"B.2",
+"C.3",
+"D.4"
+],
+answer:3
+},
+
+{
+q:"Câu 12: Nhật Bản không phải là đất nước có",
+options:[
+"A. Sông ngòi dày",
+"B. Rừng nhiều",
+"C. Biển giàu sinh vật",
+"D. Khoáng sản giàu có"
+],
+answer:3
+},
+
+{
+q:"Câu 13: Đặc điểm nổi bật dân cư Nhật Bản",
+options:[
+"A. Dân số không đông",
+"B. Tập trung miền núi",
+"C. Tăng nhanh",
+"D. Cơ cấu dân số già"
+],
+answer:3
+},
+
+{
+q:"Câu 14: Dân cư Nhật Bản phân bố tập trung ở",
+options:[
+"A. Đồng bằng ven biển",
+"B. Vùng núi",
+"C. Dọc sông",
+"D. Sườn núi thấp"
+],
+answer:0
+},
+
+{
+q:"Câu 15: Phát biểu đúng về đô thị hóa Nhật Bản",
+options:[
+"A. Tỉ lệ dân thành thị cao",
+"B. Không có siêu đô thị",
+"C. Đô thị rất ít",
+"D. Dân đô thị giảm"
+],
+answer:0
+},
+
+{
+q:"Câu 16: Dân cư tập trung thành phố ven biển chủ yếu do",
+options:[
+"A. Địa hình bằng phẳng khí hậu ôn hòa",
+"B. Đồng bằng rộng đất màu mỡ",
+"C. Bờ biển dài nhiều vũng vịnh",
+"D. Nguồn nước dồi dào"
+],
+answer:0
+},
+
+{
+q:"Câu 17: Tỉ lệ người già lớn gây khó khăn chủ yếu",
+options:[
+"A. Thiếu lao động, chi phí phúc lợi lớn",
+"B. Thu hẹp thị trường",
+"C. Phân bố dân cư không hợp lí",
+"D. Gia tăng áp lực việc làm"
+],
+answer:0
+},
+
+{
+q:"Câu 18: Kinh tế Nhật phát triển nhanh sau chiến tranh không nhờ",
+options:[
+"A. Hiện đại hóa công nghiệp",
+"B. Tăng vốn đầu tư",
+"C. Áp dụng kỹ thuật mới",
+"D. Nhập nhiều nhiên liệu"
+],
+answer:3
+},
+
+{
+q:"Câu 19: Nguyên nhân phát triển nhanh kinh tế Nhật (có bao nhiêu đúng)",
+options:["A.1","B.2","C.3","D.4"],
+answer:3
+}
+
+];
+
+let current=0;
+let userAnswers=new Array(quiz.length).fill(null);
+
+function loadQuestion(){
+document.getElementById("progress").innerText=
+"Câu "+(current+1)+"/"+quiz.length;
+
+document.getElementById("question").innerText=
+quiz[current].q;
+
+let html="";
+
+quiz[current].options.forEach(function(op,i){
+
+let checked=userAnswers[current]===i?"checked":"";
+
+html+=
+"<label class='option'>"+
+"<input type='radio' name='ans' value='"+i+"' "+checked+" onchange='saveAnswer("+i+")'> "+
+op+
+"</label>";
+
+});
+
+document.getElementById("answers").innerHTML=html;
+}
+
+function saveAnswer(i){
+userAnswers[current]=i;
+}
+
+function nextQuestion(){
+if(current<quiz.length-1){
+current++;
+loadQuestion();
+}
+}
+
+function prevQuestion(){
+if(current>0){
+current--;
+loadQuestion();
+}
+}
+
+function submitQuiz(){
+
+let score=0;
+
+for(let i=0;i<quiz.length;i++){
+if(userAnswers[i]===quiz[i].answer){
+score++;
+}
+}
+
+let review="";
+
+for(let i=0;i<quiz.length;i++){
+
+let chose=
+userAnswers[i]==null
+?"Chưa chọn"
+:quiz[i].options[userAnswers[i]];
+
+let right=quiz[i].options[quiz[i].answer];
+
+review +=
+"<p><b>Câu "+(i+1)+"</b><br>"+
+"Bạn chọn: "+chose+"<br>"+
+"Đáp án đúng: "+right+
+"</p><hr>";
+}
+
+document.querySelector(".box").innerHTML=
+"<h1>Hoàn thành</h1>"+
+"<h2>Điểm "+score+"/"+quiz.length+"</h2>"+
+review;
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
